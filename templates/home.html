@@ -1,0 +1,44 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="../static/css/home.css">
+            
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        
+      <title>Video Streaming Demonstration</title>
+      <script type=text/javascript>
+        function tempture (){
+          $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+  
+          $.getJSON($SCRIPT_ROOT+"/tempture",
+              function(data) {
+                  $(".tempture max").text(data.max)
+                  $(".tempture min").text(data.min)
+                  $(".tempture ave").text(data.ave)
+              });
+      }
+      setInterval(tempture, 100);
+      </script>
+
+
+
+
+    </head>
+    
+<body>
+    <div class="allDevice">
+       <div class="device device1">device1</div> 
+       <div class="device device2">device2</div> 
+       <div class="device device3">device3</div>
+    </div>
+    
+  
+    <h1>Video Streaming Demonstration</h1>
+    <img src="{{ url_for('video_feed') }}">
+    <h1 class="tempture max" > xxx </h1>
+    <hr>
+    <h1 class="tempture min"> xxx </h1>
+    <hr>
+    <h1 class="tempture ave"> xxx </h1>
+    
+</body>
+    </html>

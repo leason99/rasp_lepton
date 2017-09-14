@@ -1,12 +1,35 @@
-from time import time
-
+import time
+import io
+import threading
+#import picamera
+import cv2
 
 class Camera(object):
-    """An emulated camera implementation that streams a repeated sequence of
-    files 1.jpg, 2.jpg and 3.jpg at a rate of one frame per second."""
+    thread = None  # background thread that reads frames from camera
+    frame = None  # current frame is stored here by background thread
+    last_access = 0  # time of last client access to the camera
+    cap =None
 
-    def __init__(self):
-        self.frames = [open(f + '.jpg', 'rb').read() for f in ['1', '2', '3']]
+    def initialize(self):
+        if Camera.thread is None:
+            # start background frame thread
+            Camera.thread = threading.Thread(target=self._thread)
+            Camera.thread.start()
+
+            # wait until frames start to be available
+            while self.frame is None:
+                time.sleep(0)
 
     def get_frame(self):
-        return self.frames[int(time()) % 3]
+        Camera.last_access = time.time()
+        self.initialize()
+        return self.frame
+
+    @classmethod
+    def _thread(cls):
+        if cls.cap == None:
+            cls.cap = cv2.VideoCapture(0)
+            
+        ret, Frame = cls.cap.read()
+        cls.frame=Frame
+        cls.thread = None
