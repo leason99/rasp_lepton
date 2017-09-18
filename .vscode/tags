@@ -4,20 +4,29 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.8	//
+AlertThread	../AlertThread.py	/^class AlertThread(threading.Thread):$/;"	kind:class	line:4
+AlertThread	../app.py	/^from AlertThread import AlertThread $/;"	kind:namespace	line:4
+AlertThread.py	../AlertThread.py	1;"	kind:file	line:1
 BITS	../pylepton/Lepton.py	/^  BITS = 8$/;"	kind:variable	line:45
 COLS	../pylepton/Lepton.py	/^  COLS = 80$/;"	kind:variable	line:41
-Camera	../app.py	/^from camera_pi import Camera$/;"	kind:namespace	line:5
+Camera	../DataManger.py	/^from camera import Camera$/;"	kind:namespace	line:4
+Camera	../app.py	/^from camera_pi import Camera$/;"	kind:namespace	line:3
 Camera	../camera.py	/^class Camera(object):$/;"	kind:class	line:7
 Camera	../camera_pi.py	/^class Camera(object):$/;"	kind:class	line:9
 Cameras	../pic.py	/^class Cameras(object):$/;"	kind:class	line:4
-Flask	../app.py	/^from flask import Flask, render_template, Response ,jsonify $/;"	kind:namespace	line:2
+DataManger	../DataManger.py	/^class DataManger():$/;"	kind:class	line:9
+DataManger	../app.py	/^from DataManger import  DataManger$/;"	kind:namespace	line:10
+DataManger	../camera_pi.py	/^from DataManger import DataManger$/;"	kind:namespace	line:8
+DataManger.py	../DataManger.py	1;"	kind:file	line:1
+Flask	../app.py	/^from flask import Flask, render_template, Response ,jsonify,request,redirect,url_for$/;"	kind:namespace	line:2
 Lepton	../camera_pi.py	/^from pylepton import Lepton$/;"	kind:namespace	line:7
 Lepton	../pylepton/Lepton.py	/^class Lepton(object):$/;"	kind:class	line:33
 Lepton	../pylepton/__init__.py	/^from .Lepton import Lepton$/;"	kind:namespace	line:4
 Lepton.py	../pylepton/Lepton.py	1;"	kind:file	line:1
 MODE	../pylepton/Lepton.py	/^  MODE = SPI_MODE_3$/;"	kind:variable	line:44
+MongoClient	../DataManger.py	/^from pymongo import MongoClient $/;"	kind:namespace	line:1
 ROWS	../pylepton/Lepton.py	/^  ROWS = 60$/;"	kind:variable	line:40
-Response	../app.py	/^from flask import Flask, render_template, Response ,jsonify $/;"	kind:namespace	line:2
+Response	../app.py	/^from flask import Flask, render_template, Response ,jsonify,request,redirect,url_for$/;"	kind:namespace	line:2
 SPEED	../pylepton/Lepton.py	/^  SPEED = 18000000$/;"	kind:variable	line:46
 SPIDEV_MESSAGE_LIMIT	../pylepton/Lepton.py	/^  SPIDEV_MESSAGE_LIMIT = 24$/;"	kind:variable	line:47
 SPI_CPHA	../pylepton/Lepton.py	/^SPI_CPHA   = 0x01                 # \/* clock phase *\/$/;"	kind:variable	line:26
@@ -62,56 +71,82 @@ _IOWR	../pylepton/ioctl_numbers.py	/^def _IOWR(type, nr, size): return _IOC(_IOC
 __all__	../pylepton/__init__.py	/^__all__ = ["Lepton"]$/;"	kind:variable	line:1
 __enter__	../pylepton/Lepton.py	/^  def __enter__(self):$/;"	kind:member	line:80
 __exit__	../pylepton/Lepton.py	/^  def __exit__(self, type, value, tb):$/;"	kind:member	line:95
+__init__	../AlertThread.py	/^    def __init__(self,camera,alertTempture):$/;"	kind:member	line:6
+__init__	../DataManger.py	/^    def __init__ (self):$/;"	kind:member	line:14
 __init__	../pic.py	/^    def __init__(self):$/;"	kind:member	line:8
 __init__	../pylepton/Lepton.py	/^  def __init__(self, spi_dev = "\/dev\/spidev0.0"):$/;"	kind:member	line:49
 __init__.py	../pylepton/__init__.py	1;"	kind:file	line:1
 _thread	../camera.py	/^    def _thread(cls):$/;"	kind:member	line:29
-_thread	../camera_pi.py	/^    def _thread(cls):$/;"	kind:member	line:45
-app	../app.py	/^app = Flask(__name__)$/;"	kind:variable	line:12
+_thread	../camera_pi.py	/^    def _thread(self):$/;"	kind:member	line:42
+alert	../app.py	/^def alert():$/;"	kind:function	line:58
+alertThread	../app.py	/^alertThread=None$/;"	kind:variable	line:17
+alert_tempture	../app.py	/^alert_tempture=None$/;"	kind:variable	line:16
+app	../app.py	/^app = Flask(__name__)$/;"	kind:variable	line:14
 app.py	../app.py	1;"	kind:file	line:1
+camera	../AlertThread.py	/^import  camera$/;"	kind:namespace	line:2
+camera	../app.py	/^camera=Camera()$/;"	kind:variable	line:18
+camera	../camera_pi.py	/^    camera=None$/;"	kind:variable	line:15
 camera.py	../camera.py	1;"	kind:file	line:1
 camera_pi.py	../camera_pi.py	1;"	kind:file	line:1
 cap	../camera.py	/^    cap =None$/;"	kind:variable	line:11
-capture	../camera_pi.py	/^    def capture( device = "\/dev\/spidev0.0"):$/;"	kind:member	line:36
+capture	../camera_pi.py	/^    def capture(self,device = "\/dev\/spidev0.0"):$/;"	kind:member	line:34
 capture	../pylepton/Lepton.py	/^  def capture(self, data_buffer = None, log_time = False, debug_print = False, retry_reset = True):$/;"	kind:member	line:130
 capture_segment	../pylepton/Lepton.py	/^  def capture_segment(handle, xs_buf, xs_size, capture_buf):$/;"	kind:member	line:99
+client	../DataManger.py	/^    client=MongoClient("localhost",27017)$/;"	kind:variable	line:10
+collect	../DataManger.py	/^    collect=db["tempture"]$/;"	kind:variable	line:12
 ctypes	../pylepton/Lepton.py	/^import ctypes$/;"	kind:namespace	line:4
-cv2	../app.py	/^import cv2$/;"	kind:namespace	line:6
+cv2	../app.py	/^import cv2$/;"	kind:namespace	line:8
 cv2	../camera.py	/^import cv2$/;"	kind:namespace	line:5
 cv2	../camera_pi.py	/^import cv2$/;"	kind:namespace	line:6
-frame	../app.py	/^frame=None$/;"	kind:variable	line:14
+datetime	../DataManger.py	/^import datetime$/;"	kind:namespace	line:3
+db	../DataManger.py	/^    db=client["raspFlir"]$/;"	kind:variable	line:11
+find	../DataManger.py	/^    def find(cls,requset):$/;"	kind:member	line:29
+frame	../app.py	/^frame=None$/;"	kind:variable	line:15
 frame	../camera.py	/^    frame = None  # current frame is stored here by background thread$/;"	kind:variable	line:9
 frame	../camera_pi.py	/^    frame = None  # current frame is stored here by background thread$/;"	kind:variable	line:11
-gen	../app.py	/^def gen(camera):$/;"	kind:function	line:24
+gen	../app.py	/^def gen(camera):$/;"	kind:function	line:25
 get_frame	../camera.py	/^    def get_frame(self):$/;"	kind:member	line:23
-get_frame	../camera_pi.py	/^    def get_frame(self):$/;"	kind:member	line:27
+get_frame	../camera_pi.py	/^    def get_frame(self):$/;"	kind:member	line:28
 get_frame	../pic.py	/^    def get_frame(self):$/;"	kind:member	line:11
-get_tempture	../camera_pi.py	/^    def get_tempture(self):$/;"	kind:member	line:31
-index	../app.py	/^def index():$/;"	kind:function	line:18
+get_tempture	../camera_pi.py	/^    def get_tempture(cls):$/;"	kind:member	line:59
+index	../app.py	/^def index():$/;"	kind:function	line:20
 initialize	../camera.py	/^    def initialize(self):$/;"	kind:member	line:13
 initialize	../camera_pi.py	/^    def initialize(self):$/;"	kind:member	line:16
 io	../camera.py	/^import io$/;"	kind:namespace	line:2
 io	../camera_pi.py	/^import io$/;"	kind:namespace	line:2
 ioctl	../pylepton/Lepton.py	/^from fcntl import ioctl$/;"	kind:namespace	line:10
 ioctl_numbers.py	../pylepton/ioctl_numbers.py	1;"	kind:file	line:1
-jsonify	../app.py	/^from flask import Flask, render_template, Response ,jsonify $/;"	kind:namespace	line:2
+isAlert	../AlertThread.py	/^    def isAlert(self):$/;"	kind:member	line:34
+isstop	../AlertThread.py	/^    def isstop(self):$/;"	kind:member	line:28
+jsonify	../app.py	/^from flask import Flask, render_template, Response ,jsonify,request,redirect,url_for$/;"	kind:namespace	line:2
 last_access	../camera.py	/^    last_access = 0  # time of last client access to the camera$/;"	kind:variable	line:10
 last_access	../camera_pi.py	/^    last_access = 0  # time of last client access to the camera$/;"	kind:variable	line:13
-np	../app.py	/^import numpy as np$/;"	kind:namespace	line:7
+np	../app.py	/^import numpy as np$/;"	kind:namespace	line:9
 np	../camera_pi.py	/^import numpy as np$/;"	kind:namespace	line:4
 np	../pylepton/Lepton.py	/^import numpy as np$/;"	kind:namespace	line:3
 pic.py	../pic.py	1;"	kind:file	line:1
-render_template	../app.py	/^from flask import Flask, render_template, Response ,jsonify $/;"	kind:namespace	line:2
+redirect	../app.py	/^from flask import Flask, render_template, Response ,jsonify,request,redirect,url_for$/;"	kind:namespace	line:2
+render_template	../app.py	/^from flask import Flask, render_template, Response ,jsonify,request,redirect,url_for$/;"	kind:namespace	line:2
+request	../app.py	/^from flask import Flask, render_template, Response ,jsonify,request,redirect,url_for$/;"	kind:namespace	line:2
+run	../AlertThread.py	/^    def run(self):$/;"	kind:member	line:14
+save	../DataManger.py	/^    def save(camera):$/;"	kind:member	line:18
+searchDetails	../app.py	/^def searchDetails():$/;"	kind:function	line:79
+setAlertTemp	../AlertThread.py	/^    def setAlertTemp(self,alertTemp):$/;"	kind:member	line:31
+set_alert	../app.py	/^def set_alert():$/;"	kind:function	line:40
+stop	../AlertThread.py	/^    def stop(self):$/;"	kind:member	line:24
 struct	../pylepton/Lepton.py	/^import struct$/;"	kind:namespace	line:5
 struct	../pylepton/ioctl_numbers.py	/^import struct$/;"	kind:namespace	line:17
-tempture	../app.py	/^def tempture():$/;"	kind:function	line:47
+tempture	../app.py	/^def tempture():$/;"	kind:function	line:72
 tempture	../camera_pi.py	/^    tempture= None$/;"	kind:variable	line:12
 thread	../camera.py	/^    thread = None  # background thread that reads frames from camera$/;"	kind:variable	line:8
 thread	../camera_pi.py	/^    thread = None  # background thread that reads frames from camera$/;"	kind:variable	line:10
+threading	../AlertThread.py	/^import threading$/;"	kind:namespace	line:1
+threading	../app.py	/^import threading$/;"	kind:namespace	line:6
 threading	../camera.py	/^import threading$/;"	kind:namespace	line:3
 threading	../camera_pi.py	/^import threading$/;"	kind:namespace	line:3
 time	../camera.py	/^import time$/;"	kind:namespace	line:1
 time	../camera_pi.py	/^import time$/;"	kind:namespace	line:1
 time	../pic.py	/^from time import time$/;"	kind:namespace	line:1
 time	../pylepton/Lepton.py	/^import time$/;"	kind:namespace	line:6
-video_feed	../app.py	/^def video_feed():$/;"	kind:function	line:38
+url_for	../app.py	/^from flask import Flask, render_template, Response ,jsonify,request,redirect,url_for$/;"	kind:namespace	line:2
+video_feed	../app.py	/^def video_feed():$/;"	kind:function	line:33

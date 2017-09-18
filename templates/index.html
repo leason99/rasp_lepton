@@ -2,26 +2,9 @@
   <head>
       <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
       
+      
     <title>Video Streaming Demonstration</title>
-    <script type=text/javascript>
-      function tempture (){
-        $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
-       
-        
-  
-        $.getJSON($SCRIPT_ROOT+"/tempture",
-            function(data) {
-                $("#maxTempture").text("Max: "+data.tempture.max)
-                $("#minTempture").text("Min: "+data.tempture.min)
-                $("#aveTempture").text("Ave: "+data.tempture.ave)
-
-            });
-
-        
-        
-    }
-    setInterval(tempture, 100);
-    </script>
+   
   </head>
   <body>
    
@@ -31,30 +14,55 @@
     <h1 id=maxTempture> mmd;samdlmas;lda;smd </h1>
     <h1 id=minTempture> mmd;samdlmas;lda;smd </h1>
     <h1 id=aveTempture> mmd;samdlmas;lda;smd </h1>
+    
+    <canvas id="myChart" width="500px" height="500px"></canvas>
+    <script src="{{ url_for("static", filename="js/Chart.js") }}"></script>
+    
     <script type=text/javascript>
-    var audio = new Audio('../audio/alert.mp3');
-    function notifyMe() {
+   
+
+   var ctx = document.getElementById("myChart").getContext('2d');
+   
+   var data = {
+	labels : ["January","February","March","April","May","June","July"],
+	datasets : [
+		{
+			fillColor : "rgba(220,220,220,0.5)",
+			strokeColor : "rgba(220,220,220,1)",
+			pointColor : "rgba(220,220,220,1)",
+			pointStrokeColor : "#fff",
+			data :[1,2,3,4,5,6,7,8,9,10]
+			
+		}
+	]
+};
+
+   var myChart = new Chart(ctx,{
+   type: 'line',
+   data: data,
+   options : {
+   responsive:false,
+   maintainAspectRatio: false
+       }});
+
+
+        
+        function notifyMe() {
       // 检查浏览器是否支持 Notification
       if (!("Notification" in window)) {
           alert("你的不支持 Notification!  TAT");
       }
-  
       // 检查用户是否已经允许使用通知
       else if (Notification.permission === "granted") {
           // 创建 Notification
-          
-          audio.play();
-
           var notification = new Notification("Hey guy!");
           notification.iconurl = 'http://img.hacpai.com/avatar/1450241301546-260.jpg?1451971807339';
           autoClose(notification);
-  
       }
-  
       // 重新发起请求，让用户同意使用通知
       else if (Notification.permission !== 'denied') {
           Notification.requestPermission(function (permission) {
-  
+
               // 用户同意使用通知
               if (!('permission' in Notification)) {
                   Notification.permission = permission;
@@ -66,11 +74,11 @@
               }
           });
       }
-  
+
       // 注意：如果浏览器禁止弹出任何通知，将无法使用
-  }
+    }
   
-  function autoClose(notification) {
+    function autoClose(notification) {
       if (typeof notification.time === 'undefined' || notification.time <= 0) {
           notification.close();
       } else {
@@ -82,11 +90,61 @@
       notification.addEventListener('click', function () {
           notification.close();
       }, false)
-  }
-</script>
+    }
+
+
+        function tempture (){
+            $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+            $.getJSON($SCRIPT_ROOT+"/tempture",
+                function(temptureData) {
+                    $("#maxTempture").text("Max: "+temptureData.tempture.max)
+                    $("#minTempture").text("Min: "+temptureData.tempture.min)
+                    $("#aveTempture").text("Ave: "+temptureData.tempture.ave)
+
+                });
+        }
+        function details (){
+            $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+            $.getJSON($SCRIPT_ROOT+"/searchDetails",
+                function(maxTemp) {
+                   myChart.data.datasets[0].data=maxTemp.maxTemp;
+				   myChart.update();
+				   //console.log(maxTemp.maxTemp);
+                });
+        }
+        function alert (){
+            $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+            $.getJSON($SCRIPT_ROOT+"/alert",
+                function(data) {
+                 
+                   if (data.data.alert == true){
+                    notifyMe();
+                   }
+                });
+
+            
+        }
+        function interval() {
+            alert();
+            tempture();
+           // details();
+        }
+    setInterval(interval, 100);
+ 
+
+   
+
+
+
+
+    </script>
    
     <button onclick="notifyMe()">Notify me!</button>
-    
+    <form method="post" action="{{ url_for('set_alert') }}" >
+        Alert tempture<br>
+        <input type="text" name="alert_tempture">
+        <input type="submit" value="set">
+    </form>
     
   </body>
 </html>
